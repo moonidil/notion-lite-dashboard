@@ -1,68 +1,98 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* --- Theme tokens --- */
+:root{
+  --bg:#faf7ff;
+  --panel:#ffffff;
+  --text:#1f1235;
+  --muted:#6b5a8e;
+  --purple:#6b4eff;
+  --purple-600:#5a3ef0;
+  --purple-200:#e6e0ff;
+  --ring: 0 0 0 3px rgba(107,78,255,.25);
+  --radius:14px;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+/* --- Base --- */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font:16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color:var(--text);
+  background: radial-gradient(1200px 700px at 10% -10%, #f2ecff, transparent),
+              radial-gradient(900px 600px at 110% -20%, #efe9ff, transparent),
+              var(--bg);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* --- Layout container --- */
+.app{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 16px 60px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+/* --- Header/Nav --- */
+.header{
+  display:flex; align-items:center; gap:16px; justify-content:space-between;
+  margin-bottom: 18px;
 }
-button:hover {
-  border-color: #646cff;
+.nav{display:flex; gap:14px; align-items:center;}
+.nav a{
+  text-decoration:none; color:var(--muted); font-weight:600;
+  padding:6px 10px; border-radius:10px;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.nav a:hover{ background: var(--purple-200); color: var(--purple); }
+.logout{ all:unset; cursor:pointer; padding:8px 14px; border-radius:12px;
+  background:var(--purple); color:#fff; font-weight:600; }
+.logout:hover{ background:var(--purple-600); }
+
+/* --- Status bar --- */
+.status{
+  display:flex; gap:12px; align-items:center;
+  padding:8px 12px; border-radius:12px; margin:6px 0 16px;
+  font-size:12px; border:1px solid var(--purple-200); background:#fff;
+}
+.status.bad{ border-color:#ffd4d4; background:#fff5f5; }
+
+/* --- Sections --- */
+section{ margin-top:26px; }
+h1,h2{ margin:10px 0 14px; }
+h1{ font-size:34px; letter-spacing:-0.02em; }
+h2{ font-size:28px; letter-spacing:-0.01em; }
+
+/* --- Panels --- */
+.panel{
+  background:var(--panel); border:1px solid #eee; border-radius: var(--radius);
+  padding:16px; box-shadow:0 6px 24px rgba(0,0,0,.04);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* --- Forms & controls --- */
+input,textarea,button{ font:inherit; }
+input,textarea{
+  width:100%; padding:12px; border-radius:12px; border:1px solid #e8e3ff;
+  background:#fff; color:var(--text); outline:none;
 }
+textarea{ min-height:120px; resize:vertical; }
+input:focus,textarea:focus{ box-shadow:var(--ring); border-color:var(--purple-200); }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 18px; border-radius:14px; border:1px solid transparent;
+  background:var(--purple); color:#fff; font-weight:700; cursor:pointer;
+}
+.btn:disabled{ opacity:.5; cursor:not-allowed; }
+.btn:hover{ background:var(--purple-600); }
+
+.btn-ghost{
+  background:#fff; color:var(--purple); border-color:var(--purple-200);
+}
+.btn-ghost:hover{ background:var(--purple-200); }
+
+/* --- Lists --- */
+.list{ display:grid; gap:12px; margin-top:12px; }
+.task{
+  display:flex; gap:10px; align-items:center; padding:10px 12px;
+  border:1px solid #eee; border-radius:12px; background:#fff;
+}
+.task small{ color:var(--muted); margin-left:6px; }
+.task .spacer{ margin-left:auto; }
+.task input[type="checkbox"]{ width:18px; height:18px; }
